@@ -22,7 +22,6 @@ bool is_Vowel(char ch) {
 }
 
 void find_vowels_consonants(string str) {
-
     for (int i = 0; i < str.size(); i++) {
         if (is_Vowel(str[i])) {
             Vowels.insert(str[i]);
@@ -33,11 +32,11 @@ void find_vowels_consonants(string str) {
         }
     }
 
-    cout << "Vowels: " << endl;
+    cout << "Vowels: ";
     for (char ch : Vowels)
         cout << ch << " ";
     cout << endl;
-    cout << "Consonants: " << endl;
+    cout << "Consonants: ";
     for (char ch : Consonants)
         cout << ch << " ";
     cout << endl;

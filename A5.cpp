@@ -4,17 +4,17 @@
 #include <map>
 using namespace std;
 
-bool is_floatVariable(string expression) {
+bool is_floatVariable(string token) {
     bool flag = true;
 
-    if ((expression[0] >= 'a' && expression[0] <= 'h') || (expression[0] >= 'A' && expression[0] <= 'H')
-        || (expression[0] >= 'o' && expression[0] <= 'z') || (expression[0] >= 'O' && expression[0] <= 'Z')) {
+    if ((token[0] >= 'a' && token[0] <= 'h') || (token[0] >= 'A' && token[0] <= 'H')
+        || (token[0] >= 'o' && token[0] <= 'z') || (token[0] >= 'O' && token[0] <= 'Z')) {
     } else {
         flag = false;
     }
 
-    for (int i = 1; i < expression.size(); i++) {
-        if ((expression[i] >= 'a' && expression[i] <= 'z') || (expression[i] >= 'A' && expression[i] <= 'Z') || (expression[i] >= '0' && expression[i] <= '9')) {
+    for (int i = 1; i < token.size(); i++) {
+        if ((token[i] >= 'a' && token[i] <= 'z') || (token[i] >= 'A' && token[i] <= 'Z') || (token[i] >= '0' && token[i] <= '9')) {
         } else {
             flag = false;
         }
@@ -22,37 +22,37 @@ bool is_floatVariable(string expression) {
     return flag;
 }
 
-bool is_floatNumber(string expression) {
+bool is_floatNumber(string token) {
     bool flag = true;
     bool zeroFound = false, beforePriod = true, afterPriod = false, havePriod = false;
 
     int afterPriod_Digit = 0;
 
-    for (int i = 0; i < expression.size(); i++) {
+    for (int i = 0; i < token.size(); i++) {
         if (beforePriod) {
-            if (i == 0 && expression[i] == '0') {
+            if (i == 0 && token[i] == '0') {
                 zeroFound = true;
-            } else if (expression[i] != '.' && zeroFound) {
+            } else if (token[i] != '.' && zeroFound) {
                 flag = false;
             } else if (i == 0) {
-                if (expression[i] >= '1' && expression[i] <= '9') {
+                if (token[i] >= '1' && token[i] <= '9') {
                 } else {
                     flag = false;
                 }
             } else if (i > 0) {
-                if (expression[i] == '.') {
+                if (token[i] == '.') {
                     afterPriod = true;
                     beforePriod = false;
-                    if (i < expression.size() - 1) {
+                    if (i < token.size() - 1) {
                         havePriod = true;
                     }
-                } else if (expression[i] >= '0' && expression[i] <= '9') {
+                } else if (token[i] >= '0' && token[i] <= '9') {
                 } else {
                     flag = false;
                 }
             }
         } else if (afterPriod) {
-            if (expression[i] >= '0' && expression[i] <= '9' && afterPriod_Digit < 2) {
+            if (token[i] >= '0' && token[i] <= '9' && afterPriod_Digit < 2) {
                 afterPriod_Digit++;
             } else {
                 flag = false;
@@ -62,37 +62,37 @@ bool is_floatNumber(string expression) {
     return flag && havePriod;
 }
 
-bool is_doubleNumber(string expression) {
+bool is_doubleNumber(string token) {
     bool flag = true;
     bool zeroFound = false, beforePriod = true, afterPriod = false, havePriod = false;
 
     int afterPriod_Digit = 0;
 
-    for (int i = 0; i < expression.size(); i++) {
+    for (int i = 0; i < token.size(); i++) {
         if (beforePriod) {
-            if (i == 0 && expression[i] == '0') {
+            if (i == 0 && token[i] == '0') {
                 zeroFound = true;
-            } else if (expression[i] != '.' && zeroFound) {
+            } else if (token[i] != '.' && zeroFound) {
                 flag = false;
             } else if (i == 0) {
-                if (expression[i] >= '1' && expression[i] <= '9') {
+                if (token[i] >= '1' && token[i] <= '9') {
                 } else {
                     flag = false;
                 }
             } else if (i > 0) {
-                if (expression[i] == '.') {
+                if (token[i] == '.') {
                     afterPriod = true;
                     beforePriod = false;
-                    if (i < expression.size() - 1) {
+                    if (i < token.size() - 1) {
                         havePriod = true;
                     }
-                } else if (expression[i] >= '0' && expression[i] <= '9') {
+                } else if (token[i] >= '0' && token[i] <= '9') {
                 } else {
                     flag = false;
                 }
             }
         } else if (afterPriod) {
-            if (expression[i] >= '0' && expression[i] <= '9') {
+            if (token[i] >= '0' && token[i] <= '9') {
                 afterPriod_Digit++;
             } else {
                 flag = false;
