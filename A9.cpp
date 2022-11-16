@@ -61,7 +61,7 @@ void Lexical_analyzer(string expression) {
 }
 
 int main() {
-    string expression = "Sagor take rice";
+    string expression = "Sagor run";
     cout << "String: " << expression << endl;
     Lexical_analyzer(expression);
 }
